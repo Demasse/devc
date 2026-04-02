@@ -1,0 +1,114 @@
+Tu es un développeur expert en Laravel, Tailwind CSS et UI/UX moderne.
+
+IMPORTANT :
+Le projet Laravel est DÉJÀ créé et ouvert dans Visual Studio Code.
+NE recrée PAS un nouveau projet Laravel.
+Travaille directement dans la structure existante (routes, controllers, models, views).
+
+OBJECTIF :
+Améliorer et compléter une application web appelée "DEVC", qui est un portfolio de développeur destiné à présenter mes services et mes réalisations afin d’attirer des clients.
+
+⚠️ EXIGENCE TRÈS IMPORTANTE :
+Le site doit être 100% RESPONSIVE (mobile-first) et parfaitement adapté à :
+
+* Téléphones 📱
+* Tablettes 📟
+* Ordinateurs 💻
+
+Utiliser Tailwind CSS avec :
+
+* grid responsive (grid-cols-1, sm:, md:, lg:)
+* flex responsive (flex-col, md:flex-row)
+* tailles de texte adaptatives (text-sm, md:text-lg, etc.)
+* espacements adaptatifs (px-4, md:px-8)
+
+---
+
+FONCTIONNALITÉS À IMPLÉMENTER :
+
+1. FRONTEND (Blade + Tailwind)
+
+* Améliorer la page d’accueil existante avec un design moderne (SaaS / agence)
+* Ajouter :
+
+  * Hero section avec effet glow + gradient
+  * Section Services (cartes avec glassmorphism + hover)
+  * Section Projets (affichage dynamique depuis la base de données)
+  * Section Contact avec bouton WhatsApp (wa.me)
+* Ajouter mode sombre / clair avec toggle + localStorage
+* Ajouter animations (hover, scroll, transitions)
+* UI moderne avec bonnes espacements et lisibilité
+
+---
+
+2. BACKEND (Laravel)
+
+* Créer les modèles et migrations :
+
+  * Project (titre, description, image, lien, technologies)
+  * Service (titre, description)
+* Créer les controllers :
+
+  * ProjectController
+  * ServiceController
+* Ajouter routes dans web.php
+
+---
+
+3. ADMIN DASHBOARD
+
+* Interface admin simple et responsive
+* CRUD complet :
+
+  * Ajouter / modifier / supprimer projets
+  * Ajouter / modifier / supprimer services
+* Upload image pour projets
+
+---
+
+4. AFFICHAGE DYNAMIQUE
+
+* Récupérer les projets depuis la base de données
+* Affichage avec boucle Blade (@foreach)
+* Cartes projets responsive avec hover effect
+
+---
+
+5. DESIGN & UX (TRÈS IMPORTANT)
+
+* Style moderne, propre et professionnel
+* Inspiration : SaaS, agence digitale
+* Couleurs :
+
+  * bleu
+  * cyan
+  * noir (dark mode)
+
+Effets visuels :
+
+* glow (lumière floue)
+* glassmorphism (cartes floues)
+* hover animations (scale, shadow)
+* transitions fluides
+
+---
+
+6. BONNES PRATIQUES
+
+* Code propre et structuré
+* Respect du MVC Laravel
+* Commentaires pour comprendre le code
+* Réutilisation des composants Blade si possible
+
+---
+
+7. IMPORTANT
+
+* Ne pas recréer un projet Laravel
+* Fournir uniquement le code à ajouter/modifier
+* Fournir des fichiers complets prêts à être copiés
+
+---
+
+OBJECTIF FINAL :
+Créer un site portfolio professionnel, moderne, responsive et optimisé pour attirer des clients, avec un accès rapide via WhatsApp.
