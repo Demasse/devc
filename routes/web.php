@@ -34,3 +34,17 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+
+// Route utilitaire pour la production (Hébergement Mutualisé, cPanel, etc.)
+// A lancer une seule fois en ligne : https://ton-site.com/setup/storage_link
+Route::get('/setup/storage_link', function () {
+    try {
+        if (file_exists(public_path('storage'))) {
+            return 'Le lien symbolique existe déjà (ou le dossier storage existe dans public). Supprimez-le d\'abord si vous voulez le recréer.';
+        }
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return 'Succès : Le lien symbolique pour les images a été créé ! Vous pouvez maintenant voir vos images.';
+    } catch (\Exception $e) {
+        return 'Erreur : ' . $e->getMessage();
+    }
+});
