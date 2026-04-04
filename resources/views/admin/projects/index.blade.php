@@ -24,7 +24,7 @@
                 <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
                     <td class="px-6 py-4">
                         @if($project->image)
-                            <img src="{{ asset('uploads/projects/' . $project->image) }}" class="w-12 h-12 rounded object-cover">
+                            <img src="{{ asset('uploads/' . $project->image) }}" class="w-12 h-12 rounded object-cover">
                         @else
                             <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-gray-400"><i class="fas fa-image"></i></div>
                         @endif
