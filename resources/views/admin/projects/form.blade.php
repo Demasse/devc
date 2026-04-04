@@ -27,12 +27,12 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">Image de couverture</label>
             @if(isset($project) && $project->image)
 
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <img src="{{ asset('images/' . $project->image) }}" class="h-32 w-full rounded-lg object-cover border border-gray-200">
-                </div>
-            <!-- <div class="mb-3">
+                </div> -->
+            <div class="mb-3">
                 <img src="{{ asset('storage/' . $project->image) }}" class="h-32 rounded-lg object-cover border border-gray-200">
-            </div> -->
+            </div>
             @endif
             <input type="file" name="image" accept="image/*" class="w-full border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition">
             <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG, WEBP. Max 2MB.</p>
