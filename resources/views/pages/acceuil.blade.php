@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEVC | Studio Web Professionnel</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-        // Initialisation Dark Mode
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -222,7 +216,7 @@
                             ];
                             $theme = $themes[$index % count($themes)];
                         @endphp
-                        <div class="glass-card rounded-[1.5rem] p-8 hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll relative overflow-hidden">
+                        <div class="service-card {{ $index > 2 ? 'hidden md:block mobile-hidden-service' : '' }} glass-card rounded-[1.5rem] p-8 hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
                                 <i class="fas {{ $theme['icon'] }} text-8xl {{ $theme['color'] }}"></i>
                             </div>
@@ -238,6 +232,15 @@
                         </div>
                     @endforelse
                 </div>
+
+                @if(count($services) > 3)
+                <div class="mt-10 text-center md:hidden reveal-on-scroll">
+                    <button id="toggle-services-btn" class="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-full hover:border-primary-500 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all shadow-sm">
+                        <span>Voir tous les services</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                @endif
             </div>
         </section>
 
@@ -466,6 +469,29 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        // Mobile Services Toggle
+        const toggleServicesBtn = document.getElementById('toggle-services-btn');
+        if (toggleServicesBtn) {
+            const hiddenCards = document.querySelectorAll('.mobile-hidden-service');
+            let servicesOpen = false;
+            
+            toggleServicesBtn.addEventListener('click', () => {
+                servicesOpen = !servicesOpen;
+                
+                hiddenCards.forEach(card => {
+                    if (servicesOpen) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                toggleServicesBtn.innerHTML = servicesOpen 
+                    ? `<span>Voir moins</span> <i class="fas fa-chevron-up"></i>` 
+                    : `<span>Voir tous les services</span> <i class="fas fa-chevron-down"></i>`;
+            });
+        }
     </script>
 </body>
 </html>
