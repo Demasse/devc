@@ -260,7 +260,7 @@
                         <div class="bg-white dark:bg-slate-800 rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-700 transition-all duration-300 group reveal-on-scroll flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-900">
                                 @if($project->image)
-                                    <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                    <img src="{{ asset('uploads/' . $project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 @else
                                     <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
                                         <i class="fas fa-image text-4xl text-slate-700"></i>
