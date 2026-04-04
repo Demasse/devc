@@ -1,600 +1,504 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <!-- Ajout du cache busting pour éviter les problèmes de cache navigateur -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>DEVC | Développeur web moderne</title>
-    <!-- Tailwind CSS + Font Awesome + Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVC | Studio Web Professionnel</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' },
+                        slate: { 850: '#151e2e', 900: '#0f172a' }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Initialisation Dark Mode
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Reset & base */
-        * {
-            font-family: 'Inter', sans-serif;
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        body {
-            transition: background-color 0.3s ease, color 0.2s ease;
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        /* Animations et styles modernes */
         .glass-card {
-            backdrop-filter: blur(2px);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
-
-        .glass-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.25);
+        .dark .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
-
-        .hero-gradient {
-            background: radial-gradient(circle at 70% 30%, rgba(59,130,246,0.08) 0%, rgba(6,182,212,0.03) 60%);
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #3b82f6;
+            transition: width 0.3s ease;
         }
-
-        .dark .hero-gradient {
-            background: radial-gradient(circle at 70% 30%, rgba(59,130,246,0.12) 0%, rgba(6,182,212,0.05) 60%);
-        }
-
-        .btn-shine {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.2s;
-        }
-
-        .btn-shine:after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(115deg, rgba(255,255,255,0) 10%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 90%);
-            transform: rotate(25deg);
-            transition: left 0.6s ease;
-        }
-
-        .btn-shine:hover:after {
-            left: 120%;
-        }
-
-        .mobile-menu-open {
-            overflow: hidden;
-        }
-
-        .project-img-placeholder {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            min-height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-        }
-
-        .group:hover .project-img-placeholder {
-            transform: scale(1.05);
-        }
-
-        .dark .project-img-placeholder {
-            background: linear-gradient(135deg, #0f172a, #020617);
-        }
-
-        .animate-float {
-            animation: float 5s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .skill-badge {
-            transition: all 0.2s;
-            cursor: default;
-        }
-
-        .skill-badge:hover {
-            transform: scale(1.05);
-            background-color: rgb(37 99 235);
-            color: white;
-        }
-
-        ::selection {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .social-icon {
-            transition: all 0.2s;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px);
-            color: #3b82f6;
-        }
-
-        /* Animation d'apparition */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        /* Loading spinner optionnel */
-        .loading-spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Scrollbar stylisée */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2563eb;
-        }
-
-        .dark ::-webkit-scrollbar-track {
-            background: #1f2937;
-        }
-
-        /* Focus visible */
-        :focus-visible {
-            outline: 2px solid #3b82f6;
-            outline-offset: 2px;
-        }
+        .nav-link:hover::after { width: 100%; }
+        
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 antialiased">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300 antialiased overflow-x-hidden selection:bg-primary-500 selection:text-white">
 
-    <!-- ========== NAVBAR MODERNE ========== -->
-    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 md:px-8">
-            <div class="flex justify-between items-center h-16 md:h-20">
-                <!-- Logo avec animation -->
-                <a href="#" class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent hover:scale-105 transition-transform">
-                    DEVC
+    <!-- ARRIÈRE-PLAN ANIMÉ (DÉCOR MÉTALLIQUE / GLOw) -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-400 dark:bg-blue-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] opacity-30 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400 dark:bg-teal-500 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/2 w-96 h-96 bg-indigo-400 dark:bg-indigo-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] opacity-30 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" id="devc-logo" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">DEVC</span>
                 </a>
 
-                <!-- Menu Desktop -->
+                <!-- Liens Desktop -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#accueil" class="nav-link font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition relative group">
-                        Accueil
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#services" class="nav-link font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition relative group">
-                        Services
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#projets" class="nav-link font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition relative group">
-                        Projets
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#contact" class="nav-link font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition relative group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <!-- Bouton toggle dark mode -->
-                    <button id="theme-toggle" class="ml-2 p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition transform hover:scale-110">
-                        <i class="fas fa-moon dark:hidden text-lg"></i>
-                        <i class="fas fa-sun hidden dark:inline-block text-lg"></i>
-                    </button>
+                    <a href="#services" class="nav-link text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Services</a>
+                    <a href="#projets" class="nav-link text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Projets</a>
+                    <a href="#contact" class="nav-link text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
+                    
+                    <div class="pl-4 border-l border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                        <!-- Theme Toggle Button -->
+                        <button id="theme-toggle" class="text-slate-500 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400 focus:outline-none transition-transform hover:scale-110">
+                            <i id="theme-icon" class="fas fa-moon text-xl"></i>
+                        </button>
+                        @auth
+                            <a href="{{ route('admin.dashboard') }}" class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md transition-all hover:shadow-lg">Dashboard</a>
+                        @else
+                            <a href="https://wa.me/237689696831" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
+                                <i class="fab fa-whatsapp"></i> Discutons
+                            </a>
+                        @endauth
+                    </div>
                 </div>
 
-                <!-- Bouton mobile + thème mobile -->
-                <div class="flex items-center gap-3 md:hidden">
-                    <button id="mobile-theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 transition transform hover:scale-110">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:inline-block"></i>
+                <!-- Menu Mobile Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="mobile-theme-toggle" class="text-slate-500 dark:text-slate-400">
+                        <i class="fas fa-moon text-xl"></i>
                     </button>
-                    <button id="menu-btn" class="focus:outline-none text-2xl p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
-                        <i class="fas fa-bars"></i>
+                    <button id="mobile-menu-btn" class="text-slate-700 dark:text-slate-300 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Menu Mobile (off-canvas) amélioré -->
-        <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-900 z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-            <div class="flex justify-end p-5">
-                <button id="close-menu" class="text-3xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">&times;</button>
-            </div>
-            <div class="flex flex-col items-center gap-8 text-xl font-semibold mt-12">
-                <a href="#accueil" class="mobile-link hover:text-blue-600 transition transform hover:scale-105">Accueil</a>
-                <a href="#services" class="mobile-link hover:text-blue-600 transition transform hover:scale-105">Services</a>
-                <a href="#projets" class="mobile-link hover:text-blue-600 transition transform hover:scale-105">Projets</a>
-                <a href="#contact" class="mobile-link hover:text-blue-600 transition transform hover:scale-105">Contact</a>
-                <hr class="w-1/2 border-gray-300 dark:border-gray-700">
-                <a href="https://wa.me/237689696831" target="_blank" class="bg-green-600 text-white px-8 py-3 rounded-full flex items-center gap-2 shadow-lg hover:bg-green-700 transition transform hover:scale-105">
-                    <i class="fab fa-whatsapp"></i> WhatsApp direct
+        <!-- Menu Mobile Overlay -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full glass border-t border-slate-200 dark:border-slate-800 shadow-xl">
+            <div class="px-6 py-6 space-y-4 flex flex-col">
+                <a href="#services" class="mobile-link text-lg font-semibold text-slate-800 dark:text-slate-200">Services</a>
+                <a href="#projets" class="mobile-link text-lg font-semibold text-slate-800 dark:text-slate-200">Projets</a>
+                <a href="#contact" class="mobile-link text-lg font-semibold text-slate-800 dark:text-slate-200">Contact</a>
+                <hr class="border-slate-200 dark:border-slate-700">
+                <a href="https://wa.me/237689696831" class="bg-green-600 text-white text-center py-3 rounded-xl font-semibold shadow-md">
+                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp Direct
                 </a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 md:px-8">
-        <!-- ========== HERO SECTION ========== -->
-        <section id="accueil" class="relative flex flex-col md:flex-row items-center justify-between py-12 md:py-20 hero-gradient rounded-3xl my-6 md:my-8 overflow-hidden">
-            <div class="md:w-1/2 text-center md:text-left z-10 animate-fade-in-up">
-                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-4">🚀 Fullstack créatif</span>
-                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
-                    Je crée des applications <span class="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">web modernes</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
-                    Développeur Laravel & React, je transforme vos idées en solutions digitales performantes et élégantes.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
-                    <a href="#projets" class="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-xl font-semibold shadow-md btn-shine transition flex items-center justify-center gap-2">
-                        <i class="fas fa-arrow-right"></i> Voir mes projets
-                    </a>
-                    <a href="https://wa.me/237689696831" target="_blank" class="border-2 border-green-500 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 px-7 py-3 rounded-xl font-medium transition flex items-center justify-center gap-2 hover:scale-105">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+    <main>
+        <!-- HERO SECTION -->
+        <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
+            <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-semibold mb-6 border border-primary-100 dark:border-primary-800/50 shadow-sm">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
+                        </span>
+                        Disponible pour de nouveaux projets
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-6">
+                        Je conçois des <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-cyan-500">applications web</span> <br>
+                        d'exception.
+                    </h1>
+                    <p class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
+                        Développeur Fullstack expert Laravel & Modern Frontends. Je transforme vos idées complexes en plateformes numériques performantes, ergonomiques et scalables.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#projets" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 px-8 py-4 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transition-all text-center flex items-center justify-center gap-2 hover:-translate-y-1">
+                            Découvrir mes travaux <i class="fas fa-arrow-down"></i>
+                        </a>
+                        <a href="#contact" class="glass-card hover:bg-white/50 dark:hover:bg-slate-800/50 text-slate-900 dark:text-white px-8 py-4 rounded-xl text-sm font-semibold shadow-sm hover:shadow-md transition-all text-center flex items-center justify-center gap-2">
+                            Demander un devis
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center gap-8 text-slate-600 dark:text-slate-400">
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-extrabold text-slate-900 dark:text-white">10+</span>
+                            <span class="text-sm font-medium">Projets livrés</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-extrabold text-slate-900 dark:text-white">100%</span>
+                            <span class="text-sm font-medium">Clients satisfaits</span>
+                        </div>
+                    </div>
                 </div>
-                <!-- stats informelles -->
-                <div class="flex flex-wrap gap-6 mt-10 justify-center md:justify-start">
-                    <div class="hover:scale-105 transition"><span class="font-black text-2xl text-blue-600">10+</span><span class="block text-sm">projets livrés</span></div>
-                    <div class="hover:scale-105 transition"><span class="font-black text-2xl text-blue-600">100%</span><span class="block text-sm">satisfaction</span></div>
-                    <div class="hover:scale-105 transition"><span class="font-black text-2xl text-blue-600">24/7</span><span class="block text-sm">support</span></div>
-                </div>
-            </div>
-            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
-                <div class="relative w-72 md:w-96 animate-float">
-                    <div class="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-gray-200 dark:ring-gray-700 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-2">
-                        <img src="https://placehold.co/600x500/0f172a/3b82f6?text=⚡+DEV+⚡" alt="Developer illustration" class="w-full h-auto rounded-xl mix-blend-multiply dark:mix-blend-screen">
+
+                <!-- Hero Graphic (Abstract Code Card UI) -->
+                <div class="relative hidden lg:block animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-cyan-500/20 rounded-[3rem] transform rotate-3 scale-105 blur-lg"></div>
+                    <div class="glass-card rounded-[2rem] p-8 relative overflow-hidden h-[500px]">
+                        <!-- Simulate Editor -->
+                        <div class="flex items-center justify-between mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                            <div class="text-xs font-mono text-slate-500">ProjectController.php</div>
+                        </div>
+                        <div class="font-mono text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                            <span class="text-purple-600 dark:text-purple-400">class</span> <span class="text-yellow-600 dark:text-yellow-300">ProjectController</span> <span class="text-purple-600 dark:text-purple-400">extends</span> <span class="text-green-600 dark:text-green-400">Controller</span><br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-600 dark:text-purple-400">public function</span> <span class="text-blue-600 dark:text-blue-400">deliverMagic</span>()<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$app = <span class="text-yellow-600 dark:text-yellow-300">App</span>::create([<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-600 dark:text-green-400">'design'</span> => <span class="text-green-600 dark:text-green-400">'Perfect'</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-600 dark:text-green-400">'performance'</span> => 100,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-600 dark:text-green-400">'ux'</span> => <span class="text-green-600 dark:text-green-400">'Flawless'</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]);<br><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-600 dark:text-purple-400">return</span> $app->launch();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <!-- Floating snippet -->
+                        <div class="absolute bottom-10 right-10 glass-card rounded-xl p-4 shadow-2xl transform rotate-[-5deg] hover:rotate-0 transition-transform">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-green-600">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900 dark:text-white text-sm">Tests passed</p>
+                                    <p class="text-xs text-slate-500">100% coverage</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========== SERVICES SECTION ========== -->
-        <section id="services" class="py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">Mes <span class="text-blue-600">services</span> sur mesure</h2>
-                <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Des solutions web robustes, scalables et design-first.</p>
+        <!-- SERVICES SECTION -->
+        <section id="services" class="py-24 relative z-10 w-full overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Expertise</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Des solutions sur mesure</h3>
+                    <p class="text-slate-600 dark:text-slate-400">J'accompagne mes clients de la réflexion architecturale jusqu'au déploiement final en production.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @forelse($services as $index => $service)
+                        @php
+                            $themes = [
+                                ['icon' => 'fa-laptop-code', 'color' => 'text-blue-500', 'bg' => 'bg-blue-50 dark:bg-blue-500/10'],
+                                ['icon' => 'fa-database', 'color' => 'text-purple-500', 'bg' => 'bg-purple-50 dark:bg-purple-500/10'],
+                                ['icon' => 'fa-mobile-screen-button', 'color' => 'text-cyan-500', 'bg' => 'bg-cyan-50 dark:bg-cyan-500/10'],
+                                ['icon' => 'fa-server', 'color' => 'text-emerald-500', 'bg' => 'bg-emerald-50 dark:bg-emerald-500/10'],
+                            ];
+                            $theme = $themes[$index % count($themes)];
+                        @endphp
+                        <div class="glass-card rounded-[1.5rem] p-8 hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i class="fas {{ $theme['icon'] }} text-8xl {{ $theme['color'] }}"></i>
+                            </div>
+                            <div class="w-14 h-14 rounded-2xl {{ $theme['bg'] }} flex items-center justify-center mb-6 shadow-inner relative z-10">
+                                <i class="fas {{ $theme['icon'] }} text-2xl {{ $theme['color'] }}"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3 relative z-10">{{ $service->title }}</h4>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed relative z-10">{{ $service->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-full text-center py-10 glass-card rounded-[1.5rem] reveal-on-scroll">
+                            <p class="text-slate-500">Plateforme en configuration. Ajout de services en cours...</p>
+                        </div>
+                    @endforelse
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 shadow-md hover:shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 translate-y-6 service-card">
-                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-code text-blue-600 text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Applications Laravel</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Backend robuste, API REST, tableaux de bord admin, authentification avancée.</p>
+        </section>
+
+        <!-- PROJETS SECTION -->
+        <section id="projets" class="py-24 bg-slate-100/50 dark:bg-slate-800/20 relative w-full">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-on-scroll gap-6">
+                    <div class="max-w-xl">
+                        <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Portfolio</h2>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Dernières réalisations</h3>
+                        <p class="text-slate-600 dark:text-slate-400">Découvrez une sélection de projets récents, alliant design élégant et code performant.</p>
+                    </div>
                 </div>
-                <div class="glass-card bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 shadow-md hover:shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 translate-y-6 service-card">
-                    <div class="w-12 h-12 bg-cyan-100 dark:bg-cyan-900/40 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-mobile-alt text-cyan-600 text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Frontend React / Vue</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Interfaces modernes, responsive, animations fluides et expérience utilisateur parfaite.</p>
-                </div>
-                <div class="glass-card bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 shadow-md hover:shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 translate-y-6 service-card">
-                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/40 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-database text-purple-600 text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Base de données & API</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Optimisation SQL, conception scalable, intégration de services tiers.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @forelse($projects as $index => $project)
+                        <div class="bg-white dark:bg-slate-800 rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-700 transition-all duration-300 group reveal-on-scroll flex flex-col h-full">
+                            <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-900">
+                                @if($project->image)
+                                    <img src="{{ Storage::url($project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                @else
+                                    <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                                        <i class="fas fa-image text-4xl text-slate-700"></i>
+                                    </div>
+                                @endif
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-1">
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ $project->title }}</h4>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-1 line-clamp-3">{{ $project->description }}</p>
+                                
+                                @if($project->technologies && is_array($project->technologies))
+                                    <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                                        @foreach($project->technologies as $tech)
+                                            <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{{ trim($tech) }}</span>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                
+                                @if($project->link)
+                                    <a href="{{ $project->link }}" target="_blank" class="inline-flex items-center text-sm font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 group/link">
+                                        Voir le cas d'étude <i class="fas fa-arrow-right ml-2 transform group-hover/link:translate-x-1 transition-transform"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-span-full py-16 text-center text-slate-500 bg-white dark:bg-slate-800 rounded-[1.5rem] border border-dashed border-slate-300 dark:border-slate-700">
+                            <i class="fas fa-box-open text-4xl mb-4 text-slate-300 dark:text-slate-600"></i>
+                            <p>Le portfolio est en cours de remplissage.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </section>
 
-        <!-- ========== PROJETS SECTION ========== -->
-        <section id="projets" class="py-12">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">✨ Réalisations récentes</h2>
-                <p class="text-gray-500 dark:text-gray-400">Des projets concrets pour des clients exigeants</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 opacity-0 translate-y-6 project-card">
-                    <div class="project-img-placeholder h-48 flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
-                        <i class="fas fa-chart-line text-white text-5xl opacity-80"></i>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold">SmartGest ERP</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Laravel + Tailwind</p>
-                        <p class="mt-3 text-gray-600 dark:text-gray-300">Solution de gestion d'entreprise avec tableau de bord temps réel et facturation.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">Laravel</span>
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">MySQL</span>
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">Alpine.js</span>
+        <!-- CTA CONTACT SECTION -->
+        <section id="contact" class="py-24 relative overflow-hidden">
+            <div class="absolute inset-0 bg-primary-600 dark:bg-slate-800 -skew-y-3 origin-bottom-left scale-110 z-0"></div>
+            
+            <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
+                
+                <div class="flex-1 p-10 lg:p-14 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
+                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Prêt à collaborer ?</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 max-w-sm">Vous avez une idée de projet web, d'application SaaS ou de plateforme e-commerce ? Parlons-en et donnons vie à votre vision.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-900 dark:text-white">Email</p>
+                                <a href="mailto:hello@devc.com" class="text-slate-600 dark:text-slate-400 hover:text-primary-500">hello@devc.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 flex-shrink-0">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-900 dark:text-white">WhatsApp & Téléphone</p>
+                                <a href="https://wa.me/237689696831" class="text-slate-600 dark:text-slate-400 hover:text-green-500">+237 689 696 831</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 opacity-0 translate-y-6 project-card">
-                    <div class="project-img-placeholder h-48 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-600">
-                        <i class="fas fa-store text-white text-5xl opacity-80"></i>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold">E-Shop Pulse</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">React + Laravel API</p>
-                        <p class="mt-3 text-gray-600 dark:text-gray-300">Plateforme e-commerce complète, paiements Stripe, panier temps réel.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">React</span>
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">Sanctum</span>
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">Tailwind</span>
+                
+                <div class="flex-1 p-10 lg:p-14 bg-slate-50 dark:bg-slate-850 border-l border-slate-100 dark:border-slate-800">
+                    <form class="space-y-5">
+                        <div>
+                            <input type="text" placeholder="Votre nom" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition text-sm text-slate-800 dark:text-slate-200">
                         </div>
-                    </div>
-                </div>
-                <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 opacity-0 translate-y-6 project-card">
-                    <div class="project-img-placeholder h-48 flex items-center justify-center bg-gradient-to-r from-fuchsia-500 to-pink-500">
-                        <i class="fas fa-calendar-alt text-white text-5xl opacity-80"></i>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold">EventFlow</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Livewire + MySQL</p>
-                        <p class="mt-3 text-gray-600 dark:text-gray-300">Application de gestion d'événements avec billetterie dynamique et QR codes.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">Livewire</span>
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">Alpine</span>
-                            <span class="skill-badge bg-gray-200 dark:bg-gray-700 text-xs px-3 py-1 rounded-full">API</span>
+                        <div>
+                            <input type="email" placeholder="Votre email" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition text-sm text-slate-800 dark:text-slate-200">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-12">
-                <a href="#" class="inline-flex items-center gap-2 bg-transparent border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-6 py-3 rounded-full font-semibold transition hover:scale-105">
-                    <span>Tous les projets</span> <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- ========== CONTACT & FORMULAIRE ========== -->
-        <section id="contact" class="py-16 my-6 rounded-3xl bg-gray-50 dark:bg-gray-800/40">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold">Discutons de votre <span class="text-blue-600">projet</span></h2>
-                <p class="text-gray-500 dark:text-gray-400 mt-2">Une idée ? Besoin d'un dev ? Écrivez-moi !</p>
-            </div>
-            <div class="flex flex-col md:flex-row gap-12 max-w-5xl mx-auto">
-                <div class="flex-1 space-y-5">
-                    <div class="flex items-center gap-4 hover:translate-x-2 transition">
-                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center"><i class="fas fa-envelope text-blue-600"></i></div>
-                        <div><p class="font-semibold">Email</p><a href="mailto:contact@devc.com" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">contact@devc.com</a></div>
-                    </div>
-                    <div class="flex items-center gap-4 hover:translate-x-2 transition">
-                        <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center"><i class="fab fa-whatsapp text-green-600"></i></div>
-                        <div><p class="font-semibold">WhatsApp</p><a href="https://wa.me/237689696831" target="_blank" class="text-gray-600 dark:text-gray-300 hover:text-green-600">+237 689 696 831</a></div>
-                    </div>
-                    <div class="flex items-center gap-4 hover:translate-x-2 transition">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center"><i class="fab fa-github text-gray-800 dark:text-white"></i></div>
-                        <div><p class="font-semibold">GitHub</p><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">/devc_creator</a></div>
-                    </div>
-                    <div class="flex gap-4 pt-4">
-                        <a href="#" class="social-icon text-2xl text-gray-500 hover:text-blue-600"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon text-2xl text-gray-500 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon text-2xl text-gray-500 hover:text-blue-600"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="flex-1">
-                    <form id="demo-form" class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
-                        <div class="mb-4">
-                            <input type="text" id="name-input" placeholder="Nom complet" required class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <div>
+                            <textarea rows="4" placeholder="Parlez-moi de votre projet..." class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition text-sm text-slate-800 dark:text-slate-200 resize-none"></textarea>
                         </div>
-                        <div class="mb-4">
-                            <input type="email" id="email-input" placeholder="Adresse email" required class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition">
-                        </div>
-                        <div class="mb-5">
-                            <textarea id="message-input" rows="3" placeholder="Décrivez votre projet..." required class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition"></textarea>
-                        </div>
-                        <button type="submit" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-md flex items-center justify-center gap-2">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>Envoyer message</span>
-                            <span class="loading-spinner"></span>
+                        <button type="button" onclick="alert('Demo: Formulaire simulé.')" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3.5 rounded-xl shadow-md transition-shadow hover:shadow-lg flex justify-center items-center gap-2">
+                            Envoyer le message <i class="fas fa-paper-plane"></i>
                         </button>
-                        <p class="text-xs text-center text-gray-400 mt-3">Réponse sous 24h ✨</p>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER moderne -->
-    <footer class="border-t border-gray-200 dark:border-gray-800 mt-12 pt-10 pb-8">
-        <div class="max-w-7xl mx-auto px-6 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">DEVC</div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">© 2026 — Tous droits réservés — Développeur passionné</p>
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-code text-primary-500 text-2xl"></i>
+                <span class="text-xl font-bold text-white">DEVC</span>
+            </div>
+            <p class="text-sm text-slate-500">© 2026 DEVC Studio. Tous droits réservés.</p>
             <div class="flex gap-4">
-                <a href="#" class="text-gray-400 hover:text-blue-600 transition"><i class="fas fa-arrow-up"></i> Haut</a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script>
-        // Empêcher le cache et forcer l'exécution du script
-        (function() {
-            console.log('Script chargé - ' + new Date().toLocaleTimeString());
-
-            // Gestion du dark mode optimisée
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
-            const htmlElement = document.documentElement;
-
-            function setTheme(theme) {
-                if (theme === 'dark') {
-                    htmlElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    htmlElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
+        // Secret Admin Login on Triple Click
+        const logoBtn = document.getElementById('devc-logo');
+        let clickCount = 0;
+        let clickTimer;
+        
+        if (logoBtn) {
+            logoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                clickCount++;
+                clearTimeout(clickTimer);
+                
+                if (clickCount >= 3) {
+                    window.location.href = "{{ route('login') }}";
                 }
-            }
+                
+                clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+            });
+        }
 
-            function toggleTheme() {
-                if (htmlElement.classList.contains('dark')) {
-                    setTheme('light');
-                } else {
-                    setTheme('dark');
+        // Navbar Scrolled State
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md', 'backdrop-blur-lg');
+                navbar.classList.replace('glass', 'bg-white/90');
+                if(document.documentElement.classList.contains('dark')) {
+                    navbar.classList.replace('bg-white/90', 'bg-slate-900/90');
                 }
-            }
-
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                setTheme('dark');
             } else {
-                setTheme('light');
+                navbar.classList.remove('shadow-md', 'backdrop-blur-lg', 'bg-white/90', 'bg-slate-900/90');
+                navbar.classList.add('glass');
             }
+        });
 
-            if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
-            if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
-
-            // Menu mobile
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuBtn = document.getElementById('close-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-
-            function openMobileMenu() {
-                mobileMenu.classList.remove('translate-x-full');
-                document.body.classList.add('mobile-menu-open');
+        // Theme Toggle Functionality
+        const themeToggleBtns = [document.getElementById('theme-toggle'), document.getElementById('mobile-theme-toggle')];
+        const themeIcon = document.getElementById('theme-icon');
+        
+        function updateIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            if(themeIcon) {
+                themeIcon.className = isDark ? 'fas fa-sun text-xl text-yellow-400' : 'fas fa-moon text-xl';
             }
-
-            function closeMobileMenu() {
-                mobileMenu.classList.add('translate-x-full');
-                document.body.classList.remove('mobile-menu-open');
-            }
-
-            if (menuBtn) menuBtn.addEventListener('click', openMobileMenu);
-            if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileMenu);
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    closeMobileMenu();
-                    const targetId = link.getAttribute('href');
-                    if(targetId && targetId !== '#') {
-                        const targetEl = document.querySelector(targetId);
-                        if(targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // Smooth scroll pour liens desktop
-            document.querySelectorAll('.nav-link').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if(href && href !== '#') {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if(target) target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // Formulaire avec feedback visuel
-            const demoForm = document.getElementById('demo-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const loadingSpinner = document.querySelector('.loading-spinner');
-            const btnText = submitBtn?.querySelector('span:first-of-type');
-
-            if(demoForm) {
-                demoForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-
-                    // Animation de chargement
-                    if(submitBtn) {
-                        submitBtn.disabled = true;
-                        if(loadingSpinner) loadingSpinner.style.display = 'inline-block';
-                        if(btnText) btnText.style.opacity = '0.7';
-                    }
-
-                    // Simuler l'envoi
-                    await new Promise(resolve => setTimeout(resolve, 800));
-
-                    // Notification moderne
-                    const successMsg = document.createElement('div');
-                    successMsg.textContent = '✨ Message envoyé avec succès ! Je vous réponds sous 24h.';
-                    successMsg.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in-up';
-                    document.body.appendChild(successMsg);
-
-                    demoForm.reset();
-
-                    setTimeout(() => {
-                        successMsg.remove();
-                    }, 3000);
-
-                    if(submitBtn) {
-                        submitBtn.disabled = false;
-                        if(loadingSpinner) loadingSpinner.style.display = 'none';
-                        if(btnText) btnText.style.opacity = '1';
-                    }
-                });
-            }
-
-            // Animation au scroll avec Intersection Observer
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.classList.add('opacity-100', 'translate-y-0');
-                        entry.target.classList.remove('opacity-0', 'translate-y-6');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            // Observer tous les éléments à animer
-            document.querySelectorAll('.service-card, .project-card, .glass-card').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Animation de la hero section
-            const heroSection = document.querySelector('#accueil');
-            if(heroSection) {
-                heroSection.classList.add('animate-fade-in-up');
-            }
-
-            // Scroll vers le haut depuis le footer
-            const backToTop = document.querySelector('footer a[href="#"]');
-            if(backToTop) {
-                backToTop.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            // Gestion du scroll pour la navbar
-            let lastScroll = 0;
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                const nav = document.querySelector('nav');
-                if(currentScroll > 100 && currentScroll > lastScroll) {
-                    nav.style.transform = 'translateY(-100%)';
+            // Mettre à jour la navbar si on a scrollé pendant le toggle
+            if (window.scrollY > 20) {
+                if(isDark) {
+                     navbar.classList.replace('bg-white/90', 'bg-slate-900/90');
                 } else {
-                    nav.style.transform = 'translateY(0)';
+                     navbar.classList.replace('bg-slate-900/90', 'bg-white/90');
                 }
-                lastScroll = currentScroll;
+            }
+        }
+        
+        updateIcon();
+
+        themeToggleBtns.forEach(btn => {
+            if(!btn) return;
+            btn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                if (document.documentElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+                updateIcon();
             });
-        })();
+        });
+
+        // Mobile Menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
