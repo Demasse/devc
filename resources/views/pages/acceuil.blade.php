@@ -197,15 +197,15 @@
         </section>
 
         <!-- SERVICES SECTION -->
-        <section id="services" class="py-24 relative z-10 w-full overflow-hidden">
+        <section id="services" class="py-12 md:py-24 relative z-10 w-full overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16 reveal-on-scroll">
+                <div class="text-center max-w-2xl mx-auto mb-6 md:mb-16 reveal-on-scroll">
                     <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Expertise</h2>
                     <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Des solutions sur mesure</h3>
                     <p class="text-slate-600 dark:text-slate-400">J'accompagne mes clients de la réflexion architecturale jusqu'au déploiement final en production.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     @forelse($services as $index => $service)
                         @php
                             $themes = [
@@ -245,9 +245,9 @@
         </section>
 
         <!-- PROJETS SECTION -->
-        <section id="projets" class="py-24 bg-slate-100/50 dark:bg-slate-800/20 relative w-full">
+        <section id="projets" class="py-12 md:py-24 bg-slate-100/50 dark:bg-slate-800/20 relative w-full">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-on-scroll gap-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16 reveal-on-scroll gap-6">
                     <div class="max-w-xl">
                         <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Portfolio</h2>
                         <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Dernières réalisations</h3>
@@ -255,7 +255,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     @forelse($projects as $index => $project)
                         <div class="bg-white dark:bg-slate-800 rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-700 transition-all duration-300 group reveal-on-scroll flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-900">
@@ -298,7 +298,7 @@
         </section>
 
         <!-- CTA CONTACT SECTION -->
-        <section id="contact" class="py-24 relative overflow-hidden">
+        <section id="contact" class="py-12 md:py-24 relative overflow-hidden">
             <div class="absolute inset-0 bg-primary-600 dark:bg-slate-800 -skew-y-3 origin-bottom-left scale-110 z-0"></div>
             
             <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
@@ -358,9 +358,9 @@
             </div>
             <p class="text-sm text-slate-500">© 2026 DEVC Studio. Tous droits réservés.</p>
             <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                <!-- <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
                 <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a> -->
             </div>
         </div>
     </footer>
