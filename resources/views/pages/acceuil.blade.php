@@ -112,7 +112,7 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
+        <section class="relative pt-12 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
             <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
                 <div class="animate-fade-in-up">
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-semibold mb-6 border border-primary-100 dark:border-primary-800/50 shadow-sm">
@@ -197,7 +197,7 @@
         </section>
 
         <!-- SERVICES SECTION -->
-        <section id="services" class="py-12 md:py-24 relative z-10 w-full overflow-hidden">
+        <section id="services" class="py-2 md:py-24 relative z-10 w-full overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-6 md:mb-16 reveal-on-scroll">
                     <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Expertise</h2>
