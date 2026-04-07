@@ -112,9 +112,9 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class=" bg-amber-800 relative pt-12 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
-            <div class=" bg-green-600 max-w-7xl -m-[4.5rem] mx-auto w-full grid lg:grid-cols-2 gap-28 items-center">
-                <div class="bg-fuchsia-900 animate-fade-in-up">
+        <section class="  relative pt-12 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
+            <div class="  max-w-7xl -mt-[4.8rem] mx-auto w-full grid lg:grid-cols-2 gap-28 items-center">
+                <div class=" animate-fade-in-up">
                     <div class="  inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-semibold mb-6 border border-primary-100 dark:border-primary-800/50 shadow-sm">
                         <span class="relative flex h-3 w-3">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
@@ -197,8 +197,8 @@
         </section>
 
         <!-- SERVICES SECTION -->
-        <section id="services" class=" bg-fuchsia-500 py-2 md:py-24 relative z-10 w-full overflow-hidden">
-            <div class=" bg-yellow-200 -m-[5.2rem]  max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="services" class="  py-2 md:py-24 relative z-10 w-full overflow-hidden">
+            <div class="  -m-[5.2rem]  max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-6 md:mb-16 reveal-on-scroll">
                     <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Expertise</h2>
                     <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Des solutions sur mesure</h3>
