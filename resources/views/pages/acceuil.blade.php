@@ -37,7 +37,7 @@
             transition: width 0.3s ease;
         }
         .nav-link:hover::after { width: 100%; }
-        
+
         .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
     </style>
@@ -68,7 +68,7 @@
                     <a href="#services" class="nav-link text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Services</a>
                     <a href="#projets" class="nav-link text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Projets</a>
                     <a href="#contact" class="nav-link text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
-                    
+
                     <div class="pl-4 border-l border-slate-200 dark:border-slate-700 flex items-center gap-4">
                         <!-- Theme Toggle Button -->
                         <button id="theme-toggle" class="text-slate-500 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400 focus:outline-none transition-transform hover:scale-110">
@@ -112,10 +112,10 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="relative pt-12 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
-            <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-                <div class="animate-fade-in-up">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-semibold mb-6 border border-primary-100 dark:border-primary-800/50 shadow-sm">
+        <section class=" bg-amber-800 relative pt-12 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden min-h-[90vh] flex items-center">
+            <div class=" bg-green-600 max-w-7xl -m-[4.5rem] mx-auto w-full grid lg:grid-cols-2 gap-28 items-center">
+                <div class="bg-fuchsia-900 animate-fade-in-up">
+                    <div class="  inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-semibold mb-6 border border-primary-100 dark:border-primary-800/50 shadow-sm">
                         <span class="relative flex h-3 w-3">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
@@ -138,7 +138,7 @@
                             Demander un devis
                         </a>
                     </div>
-                    
+
                     <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center gap-8 text-slate-600 dark:text-slate-400">
                         <div class="flex flex-col">
                             <span class="text-3xl font-extrabold text-slate-900 dark:text-white">10+</span>
@@ -178,7 +178,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                             }
                         </div>
-                        
+
                         <!-- Floating snippet -->
                         <div class="absolute bottom-10 right-10 glass-card rounded-xl p-4 shadow-2xl transform rotate-[-5deg] hover:rotate-0 transition-transform">
                             <div class="flex items-center gap-3">
@@ -197,15 +197,15 @@
         </section>
 
         <!-- SERVICES SECTION -->
-        <section id="services" class="py-2 md:py-24 relative z-10 w-full overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="services" class=" bg-fuchsia-500 py-2 md:py-24 relative z-10 w-full overflow-hidden">
+            <div class=" bg-yellow-200 -m-[5.2rem]  max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-6 md:mb-16 reveal-on-scroll">
                     <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Expertise</h2>
                     <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Des solutions sur mesure</h3>
                     <p class="text-slate-600 dark:text-slate-400">J'accompagne mes clients de la réflexion architecturale jusqu'au déploiement final en production.</p>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+
+                <div class=" -mt-[3.5rem] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     @forelse($services as $index => $service)
                         @php
                             $themes = [
@@ -271,7 +271,7 @@
                             <div class="p-8 flex flex-col flex-1">
                                 <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ $project->title }}</h4>
                                 <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-1 line-clamp-3">{{ $project->description }}</p>
-                                
+
                                 @if($project->technologies && is_array($project->technologies))
                                     <div class="flex flex-wrap gap-2 mb-6 mt-auto">
                                         @foreach($project->technologies as $tech)
@@ -279,7 +279,7 @@
                                         @endforeach
                                     </div>
                                 @endif
-                                
+
                                 @if($project->link)
                                     <a href="{{ $project->link }}" target="_blank" class="inline-flex items-center text-sm font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 group/link">
                                         Voir le cas d'étude <i class="fas fa-arrow-right ml-2 transform group-hover/link:translate-x-1 transition-transform"></i>
@@ -300,13 +300,13 @@
         <!-- CTA CONTACT SECTION -->
         <section id="contact" class="py-12 md:py-24 relative overflow-hidden">
             <div class="absolute inset-0 bg-primary-600 dark:bg-slate-800 -skew-y-3 origin-bottom-left scale-110 z-0"></div>
-            
+
             <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
-                
+
                 <div class="flex-1 p-10 lg:p-14 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
                     <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Prêt à collaborer ?</h2>
                     <p class="text-slate-600 dark:text-slate-400 mb-8 max-w-sm">Vous avez une idée de projet web, d'application SaaS ou de plateforme e-commerce ? Parlons-en et donnons vie à votre vision.</p>
-                    
+
                     <div class="space-y-6">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 flex-shrink-0">
@@ -328,7 +328,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="flex-1 p-10 lg:p-14 bg-slate-50 dark:bg-slate-850 border-l border-slate-100 dark:border-slate-800">
                     <form class="space-y-5">
                         <div>
@@ -371,17 +371,17 @@
         const logoBtn = document.getElementById('devc-logo');
         let clickCount = 0;
         let clickTimer;
-        
+
         if (logoBtn) {
             logoBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 clickCount++;
                 clearTimeout(clickTimer);
-                
+
                 if (clickCount >= 3) {
                     window.location.href = "{{ route('login') }}";
                 }
-                
+
                 clickTimer = setTimeout(() => { clickCount = 0; }, 600);
             });
         }
@@ -404,7 +404,7 @@
         // Theme Toggle Functionality
         const themeToggleBtns = [document.getElementById('theme-toggle'), document.getElementById('mobile-theme-toggle')];
         const themeIcon = document.getElementById('theme-icon');
-        
+
         function updateIcon() {
             const isDark = document.documentElement.classList.contains('dark');
             if(themeIcon) {
@@ -419,7 +419,7 @@
                 }
             }
         }
-        
+
         updateIcon();
 
         themeToggleBtns.forEach(btn => {
@@ -438,12 +438,12 @@
         // Mobile Menu
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         if (mobileBtn && mobileMenu) {
             mobileBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
-            
+
             // Close mobile menu when clicking a link
             document.querySelectorAll('.mobile-link').forEach(link => {
                 link.addEventListener('click', () => {
@@ -475,10 +475,10 @@
         if (toggleServicesBtn) {
             const hiddenCards = document.querySelectorAll('.mobile-hidden-service');
             let servicesOpen = false;
-            
+
             toggleServicesBtn.addEventListener('click', () => {
                 servicesOpen = !servicesOpen;
-                
+
                 hiddenCards.forEach(card => {
                     if (servicesOpen) {
                         card.classList.remove('hidden');
@@ -486,9 +486,9 @@
                         card.classList.add('hidden');
                     }
                 });
-                
-                toggleServicesBtn.innerHTML = servicesOpen 
-                    ? `<span>Voir moins</span> <i class="fas fa-chevron-up"></i>` 
+
+                toggleServicesBtn.innerHTML = servicesOpen
+                    ? `<span>Voir moins</span> <i class="fas fa-chevron-up"></i>`
                     : `<span>Voir tous les services</span> <i class="fas fa-chevron-down"></i>`;
             });
         }
