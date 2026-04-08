@@ -152,7 +152,7 @@
                 </div>
 
                 <!-- Hero Graphic (Abstract Code Card UI) -->
-                <div class="relative hidden lg:block animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class=" relative hidden lg:block animate-fade-in-up" style="animation-delay: 0.2s;">
                     <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-cyan-500/20 rounded-[3rem] transform rotate-3 scale-105 blur-lg"></div>
                     <div class="glass-card rounded-[2rem] p-8 relative overflow-hidden h-[500px]">
                         <!-- Simulate Editor -->
