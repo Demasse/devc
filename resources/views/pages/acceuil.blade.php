@@ -198,16 +198,15 @@
         </section>
 
         <!-- SERVICES SECTION -->
-        <section id="services" class="  py-2 md:py-24 relative z-10 w-full overflow-hidden">
-            <div class="  -m-[5.2rem]  max-w-7xl mx-auto px-6 lg:px-8">
+     <section id="services" class="py-8 md:py-24 relative z-10 w-full overflow-hidden">
+         <div class="max-w-7xl mx-auto px-6 lg:px-8 lg:-mt-[5.2rem]">
                 <div class="text-center max-w-2xl mx-auto mb-6 md:mb-16 reveal-on-scroll">
                     <h2 class="text-3xl font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Expertise</h2>
                     <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Des solutions sur mesure</h3>
                     <p class="text-slate-600 dark:text-slate-400">J'accompagne mes clients de la réflexion architecturale jusqu'au déploiement final en production.</p>
                 </div>
 
-                <div class=" -mt-[3.5rem] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-                    @forelse($services as $index => $service)
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:-mt-14"> @forelse($services as $index => $service)
                         @php
                             $themes = [
                                 ['icon' => 'fa-laptop-code', 'color' => 'text-blue-500', 'bg' => 'bg-blue-50 dark:bg-blue-500/10'],
