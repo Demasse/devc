@@ -298,10 +298,10 @@
         </section>
 
         <!-- CTA CONTACT SECTION -->
-        <section id="contact" class=" bg-red-600 -mt-[3.5rem] py-12 md:py-24 relative overflow-hidden">
+        <section id="contact" class=" -mt-[3.5rem] py-12 md:py-24 relative overflow-hidden">
             <div class="absolute inset-0 bg-primary-600 dark:bg-slate-800 -skew-y-3 origin-bottom-left scale-110 z-0"></div>
 
-            <div class=" bg-yellow-300 -mt-[3.5rem] max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
+            <div class="  -mt-[3.5rem] max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
 
                 <div class="flex-1 p-10 lg:p-14 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
                     <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Prêt à collaborer ?</h2>
