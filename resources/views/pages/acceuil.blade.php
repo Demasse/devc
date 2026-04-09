@@ -245,8 +245,8 @@
         </section>
 
         <!-- PROJETS SECTION -->
-        <section id="projets" class="py-12 md:py-24 bg-slate-100/50 dark:bg-slate-800/20 relative w-full">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="projets" class=" -mt-[3.5rem] bg-emerald-600  py-12 md:py-24 bg-slate-100/50 dark:bg-slate-800/20 relative w-full">
+            <div class=" bg-amber-500 max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16 reveal-on-scroll gap-6">
                     <div class="max-w-xl">
                         <h2 class="text-sm font-bold text-primary-600 dark:text-primary-400 tracking-wider uppercase mb-2">Portfolio</h2>
@@ -255,7 +255,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                <div class=" -mt-[3.5rem] bg-fuchsia-600 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     @forelse($projects as $index => $project)
                         <div class="bg-white dark:bg-slate-800 rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-700 transition-all duration-300 group reveal-on-scroll flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-900">
@@ -298,10 +298,10 @@
         </section>
 
         <!-- CTA CONTACT SECTION -->
-        <section id="contact" class="py-12 md:py-24 relative overflow-hidden">
+        <section id="contact" class=" bg-red-600 -mt-[3.5rem] py-12 md:py-24 relative overflow-hidden">
             <div class="absolute inset-0 bg-primary-600 dark:bg-slate-800 -skew-y-3 origin-bottom-left scale-110 z-0"></div>
 
-            <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
+            <div class=" bg-yellow-300 -mt-[3.5rem] max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden reveal-on-scroll">
 
                 <div class="flex-1 p-10 lg:p-14 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
                     <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Prêt à collaborer ?</h2>
