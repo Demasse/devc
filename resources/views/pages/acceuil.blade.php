@@ -350,7 +350,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+    <footer class="bg-slate-900 text-slate-300 py-7 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-2">
                 <i class="fas fa-code text-primary-500 text-2xl"></i>
