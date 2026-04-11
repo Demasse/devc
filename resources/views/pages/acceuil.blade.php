@@ -278,6 +278,7 @@
                                             <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{{ trim($tech) }}</span>
                                         @endforeach
                                     </div>
+                                    <a href=""></a>
                                 @endif
 
                                 @if($project->link)
