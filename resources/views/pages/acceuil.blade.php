@@ -208,13 +208,13 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:-mt-14"> @forelse($services as $index => $service)
                         @php
-                            $themes = [
-                                ['icon' => 'fa-laptop-code', 'color' => 'text-blue-500', 'bg' => 'bg-blue-50 dark:bg-blue-500/10'],
-                                ['icon' => 'fa-database', 'color' => 'text-purple-500', 'bg' => 'bg-purple-50 dark:bg-purple-500/10'],
-                                ['icon' => 'fa-mobile-screen-button', 'color' => 'text-cyan-500', 'bg' => 'bg-cyan-50 dark:bg-cyan-500/10'],
-                                ['icon' => 'fa-server', 'color' => 'text-emerald-500', 'bg' => 'bg-emerald-50 dark:bg-emerald-500/10'],
-                            ];
-                            $theme = $themes[$index % count($themes)];
+    $themes = [
+        ['icon' => 'fa-laptop-code', 'color' => 'text-blue-500', 'bg' => 'bg-blue-50 dark:bg-blue-500/10'],
+        ['icon' => 'fa-database', 'color' => 'text-purple-500', 'bg' => 'bg-purple-50 dark:bg-purple-500/10'],
+        ['icon' => 'fa-mobile-screen-button', 'color' => 'text-cyan-500', 'bg' => 'bg-cyan-50 dark:bg-cyan-500/10'],
+        ['icon' => 'fa-server', 'color' => 'text-emerald-500', 'bg' => 'bg-emerald-50 dark:bg-emerald-500/10'],
+    ];
+    $theme = $themes[$index % count($themes)];
                         @endphp
                         <div class="service-card {{ $index > 2 ? 'hidden md:block mobile-hidden-service' : '' }} glass-card rounded-[1.5rem] p-8 hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -278,6 +278,8 @@
                                             <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{{ trim($tech) }}</span>
                                         @endforeach
                                     </div>
+                                    <a href=""></a>
+                                    <a href=""></a>
                                     <a href=""></a>
                                 @endif
 
