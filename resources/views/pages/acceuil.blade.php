@@ -279,6 +279,8 @@
                                         @endforeach
                                     </div>
                                     <h1>fqsfqsf</h1>
+                                    <h1>fqsfqsf</h1>
+
                                 @endif
 
                                 @if($project->link)
